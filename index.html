@@ -12,24 +12,36 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      background-color: #f0f0f0;
+      background-color: #7b1fa2; /* REKLO bənövşəyi */
+      color: #ffffff; /* Ağ mətn */
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
 
     .container {
       text-align: center;
-      white-space: nowrap; /* Sözlərin alt-alta keçməsinin qarşısını alır */
-      max-width: 100%;
-      overflow: hidden;
+      max-width: 90%;
+      padding: 20px;
     }
 
-    h1, p {
+    h1 {
       margin: 0;
-      font-size: 5vw; /* Ekran ölçüsünə görə avtomatik böyüyən mətn */
+      font-size: 6vw;
+      font-weight: bold;
     }
 
     p {
-      margin-top: 1vh;
+      margin-top: 2vh;
       font-size: 3vw;
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 8vw;
+      }
+
+      p {
+        font-size: 4.5vw;
+      }
     }
   </style>
 </head>
