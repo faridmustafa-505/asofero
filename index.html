@@ -1,11 +1,42 @@
 <!DOCTYPE html>
-<html>
+<html lang="az">
 <head>
-  <title>Fərid’in Saytı</title>
   <meta charset="UTF-8">
+  <title>Fərid’in Saytı</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #f0f0f0;
+    }
+
+    .container {
+      text-align: center;
+      white-space: nowrap; /* Sözlərin alt-alta keçməsinin qarşısını alır */
+      max-width: 100%;
+      overflow: hidden;
+    }
+
+    h1, p {
+      margin: 0;
+      font-size: 5vw; /* Ekran ölçüsünə görə avtomatik böyüyən mətn */
+    }
+
+    p {
+      margin-top: 1vh;
+      font-size: 3vw;
+    }
+  </style>
 </head>
 <body>
-  <h1>Xoş gəldiniz!</h1>
-  <p>Bu sayt tamamilə pulsuz yaradılıb.</p>
+  <div class="container">
+    <h1>Xoş gəldiniz!</h1>
+    <p>Bu sayt tamamilə pulsuz yaradılıb.</p>
+  </div>
 </body>
 </html>
