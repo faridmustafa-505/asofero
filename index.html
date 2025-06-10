@@ -13,7 +13,7 @@
       justify-content: center;
       align-items: center;
       background-color: #7b1fa2; /* REKLO bənövşəyi */
-      color: #ffffff; /* Ağ mətn */
+      color: #ffffff;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
 
@@ -29,7 +29,7 @@
       font-weight: bold;
     }
 
-    p {
+    p, #countdown {
       margin-top: 2vh;
       font-size: 3vw;
     }
@@ -39,7 +39,7 @@
         font-size: 8vw;
       }
 
-      p {
+      p, #countdown {
         font-size: 4.5vw;
       }
     }
@@ -48,7 +48,34 @@
 <body>
   <div class="container">
     <h1>Xoş gəldin!</h1>
-    <p>13 iyun saat 23:30 tarixində yenidən gəl. SAYT DƏYİŞİLƏCƏK!</p>
+    <div id="countdown">Yüklənir...</div>
   </div>
+
+  <script>
+    function updateCountdown() {
+      const targetDate = new Date("2025-06-13T23:30:00");
+      const now = new Date();
+      const diff = targetDate - now;
+
+      if (diff <= 0) {
+        document.getElementById("countdown").innerHTML = "Sayt yeniləndi!";
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+      document.getElementById("countdown").innerHTML =
+        `${String(days).padStart(2, '0')} gün ` +
+        `${String(hours).padStart(2, '0')} saat ` +
+        `${String(minutes).padStart(2, '0')} dəqiqə ` +
+        `${String(seconds).padStart(2, '0')} saniyə`;
+    }
+
+    updateCountdown(); // ilk dəfə işlədilir
+    setInterval(updateCountdown, 1000); // hər saniyədə yenilə
+  </script>
 </body>
 </html>
