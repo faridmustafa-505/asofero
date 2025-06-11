@@ -12,6 +12,7 @@
       overflow: hidden;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       color: #fff;
+      background: black;
     }
 
     canvas {
@@ -35,47 +36,43 @@
     }
 
     h1 {
-  margin: 0;
-  font-size: 6vw;
-  font-weight: bold;
-  text-shadow: 
-    0 0 2px #000000,
-    0 0 4px #000000;
-}
+      margin: 0;
+      font-size: 6vw;
+      font-weight: bold;
+      text-shadow: 
+        0 0 2px #000000,
+        0 0 4px #000000;
+    }
 
-h3 {
-  margin: 0;
-  font-size: 6vw;
-  font-weight: bold;
-  text-shadow: 
-    0 0 2px #000000,
-    0 0 4px #000000;
-}
-    
+    .small-text {
+      margin-top: 5vh;
+      font-size: 2vw;
+      text-shadow: 
+        0 0 2px #000000,
+        0 0 4px #000000;
+    }
+
     #countdown {
-  margin-top: 2vh;
-  font-size: 3vw;
-  text-shadow: 
-    0 0 2px #000000,
-    0 0 4px #000000;
-}
+      margin-top: 1.5vh;
+      font-size: 3vw;
+      text-shadow: 
+        0 0 2px #000000,
+        0 0 4px #000000;
+    }
 
     @media (max-width: 600px) {
-  h1 {
-    font-size: 8vw;
-    text-shadow: 
-      0 0 2px #000000,
-      0 0 4px #000000;
-  }
+      h1 {
+        font-size: 8vw;
+      }
 
-  #countdown {
-    font-size: 4.5vw;
-    text-shadow: 
-      0 0 2px #000000,
-      0 0 4px #000000;
-  }
-}
+      .small-text {
+        font-size: 4vw;
+      }
 
+      #countdown {
+        font-size: 5vw;
+      }
+    }
   </style>
 </head>
 <body>
@@ -84,7 +81,7 @@ h3 {
 
   <div class="container">
     <h1>Xoş gəldin!</h1>
-    <h3>Saytın Yenilənməsinə Son:</h3>
+    <p class="small-text">SAYTIN YENİLƏNMƏSİNƏ SON:</p>
     <div id="countdown">Yüklənir...</div>
   </div>
 
@@ -115,7 +112,7 @@ h3 {
     updateCountdown();
     setInterval(updateCountdown, 1000);
 
-    // MATRIX CANVAS
+    // Matrix Canvas
     const canvas = document.getElementById("matrixCanvas");
     const ctx = canvas.getContext("2d");
 
@@ -128,11 +125,10 @@ h3 {
     const drops = Array.from({ length: columns }, () => 1);
 
     function drawMatrix() {
-      // Arxa fon: şəffaf bənövşəyi qatı overlay kimi
       ctx.fillStyle = "rgba(123, 31, 162, 0.1)";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      ctx.fillStyle = "#ffffff"; // Ağ rəngdə 0 və 1-lər
+      ctx.fillStyle = "#ffffff";
       ctx.font = fontSize + "px monospace";
 
       for (let i = 0; i < drops.length; i++) {
@@ -149,7 +145,6 @@ h3 {
 
     setInterval(drawMatrix, 50);
 
-    // Resize zamanı canvas-ı yenilə
     window.addEventListener("resize", () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
