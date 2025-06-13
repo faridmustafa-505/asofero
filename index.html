@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+  <meta charset="UTF-8">
+  <title>ASİMAN</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #fff;
+    }
+
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 0;
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      height: 100%;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      text-align: center;
+      padding: 20px;
+    }
+
+    h1 {
+  margin: 0;
+  font-size: 6vw;
+  font-weight: bold;
+  text-shadow: 
+    0 0 2px #000000,
+    0 0 4px #000000;
+}
+
+    
+    #countdown {
+  margin-top: 2vh;
+  font-size: 3vw;
+  text-shadow: 
+    0 0 2px #000000,
+    0 0 4px #000000;
+}
+
+    @media (max-width: 600px) {
+  h1 {
+    font-size: 8vw;
+    text-shadow: 
+      0 0 2px #000000,
+      0 0 4px #000000;
+  }
+
+  #countdown {
+    font-size: 4.5vw;
+    text-shadow: 
+      0 0 2px #000000,
+      0 0 4px #000000;
+  }
+}
+
+  </style>
+</head>
+<body>
+
+  <canvas id="matrixCanvas"></canvas>
+
+  <div class="container">
+    <div id="countdown">Yüklənir...</div>
+  </div>
+
+  <script>
+    // Geri sayım
+    function updateCountdown() {
+      const targetDate = new Date("2025-06-14T00:00:00");
+      const now = new Date();
+      const diff = targetDate - now;
+
+      if (diff <= 0) {
+        document.getElementById("countdown").innerHTML = "";
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+      document.getElementById("countdown").innerHTML =
+        `${String(days).padStart(2, '0')} gün ` +
+        `${String(hours).padStart(2, '0')} saat ` +
+        `${String(minutes).padStart(2, '0')} dəqiqə ` +
+        `${String(seconds).padStart(2, '0')} saniyə`;
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+
+    // MATRIX CANVAS
+    const canvas = document.getElementById("matrixCanvas");
+    const ctx = canvas.getContext("2d");
+
+    canvas.height = window.innerHeight;
+    canvas.width = window.innerWidth;
+
+    const binary = "01";
+    const fontSize = 16;
+    const columns = canvas.width / fontSize;
+    const drops = Array.from({ length: columns }, () => 1);
+
+    function drawMatrix() {
+      // Arxa fon: şəffaf bənövşəyi qatı overlay kimi
+      ctx.fillStyle = "rgba(123, 31, 162, 0.1)";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.fillStyle = "#ffffff"; // Ağ rəngdə 0 və 1-lər
+      ctx.font = fontSize + "px monospace";
+
+      for (let i = 0; i < drops.length; i++) {
+        const text = binary[Math.floor(Math.random() * binary.length)];
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+
+        drops[i]++;
+      }
+    }
+
+    setInterval(drawMatrix, 50);
+
+    // Resize zamanı canvas-ı yenilə
+    window.addEventListener("resize", () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  </script>
+</body>
+</html>
