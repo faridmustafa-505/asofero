@@ -12,6 +12,7 @@
       overflow: hidden;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       color: #fff;
+      background-color: #000;
     }
 
     canvas {
@@ -35,39 +36,33 @@
     }
 
     h1 {
-  margin: 0;
-  font-size: 6vw;
-  font-weight: bold;
-  text-shadow: 
-    0 0 2px #000000,
-    0 0 4px #000000;
-}
+      margin: 0;
+      font-size: 6vw;
+      font-weight: bold;
+      color: #fff;
+      text-shadow: 
+        0 0 2px #000000,
+        0 0 4px #000000;
+    }
 
-    
     #countdown {
-  margin-top: 2vh;
-  font-size: 3vw;
-  text-shadow: 
-    0 0 2px #000000,
-    0 0 4px #000000;
-}
+      margin-top: 2vh;
+      font-size: 3vw;
+      color: #fff;
+      text-shadow: 
+        0 0 2px #000000,
+        0 0 4px #000000;
+    }
 
     @media (max-width: 600px) {
-  h1 {
-    font-size: 8vw;
-    text-shadow: 
-      0 0 2px #000000,
-      0 0 4px #000000;
-  }
+      h1 {
+        font-size: 8vw;
+      }
 
-  #countdown {
-    font-size: 4.5vw;
-    text-shadow: 
-      0 0 2px #000000,
-      0 0 4px #000000;
-  }
-}
-
+      #countdown {
+        font-size: 4.5vw;
+      }
+    }
   </style>
 </head>
 <body>
@@ -75,19 +70,23 @@
   <canvas id="matrixCanvas"></canvas>
 
   <div class="container">
-    <h1>XOŞ GƏLDİN 💜</h1>
+    <h1 id="mainTitle">XOŞ GƏLDİN 💜</h1>
     <div id="countdown">Yüklənir...</div>
   </div>
 
   <script>
-    // Geri sayım
+    let isExpired = false; // Vaxt bitib-bitmədiyini yoxlayırıq
+
+    // Geri sayım funksiyası
     function updateCountdown() {
       const targetDate = new Date("2025-06-14T00:00:00");
       const now = new Date();
       const diff = targetDate - now;
 
       if (diff <= 0) {
-        document.getElementById("countdown").innerHTML = "ÇIX VƏ TƏRAR GİR";
+        document.getElementById("countdown").innerHTML = "DEYƏ BİLMƏDİM ORDA SƏNƏ, GEDİRƏM DEYƏNDƏ İNTİHARDAN SÖZ ETMİŞDİM, SƏNİ UŞAQLIĞIMDAN BƏRİ SEVDİM VƏ ÖLDÜKDƏN SONRADA SEVƏCƏM. BƏLKƏ BAŞQA BİR DÜNYADA ƏBƏDİ BİRLİKDƏ OLARIĞ, SAĞOL 💜";
+        document.getElementById("mainTitle").innerHTML = "XOŞ GƏLDİN 🖤";
+        isExpired = true;
         return;
       }
 
@@ -106,7 +105,7 @@
     updateCountdown();
     setInterval(updateCountdown, 1000);
 
-    // MATRIX CANVAS
+    // MATRIX EFFEKTI
     const canvas = document.getElementById("matrixCanvas");
     const ctx = canvas.getContext("2d");
 
@@ -119,11 +118,10 @@
     const drops = Array.from({ length: columns }, () => 1);
 
     function drawMatrix() {
-      // Arxa fon: şəffaf bənövşəyi qatı overlay kimi
-      ctx.fillStyle = "rgba(123, 31, 162, 0.1)";
+      ctx.fillStyle = isExpired ? "rgba(0, 0, 0, 0.1)" : "rgba(123, 31, 162, 0.1)";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      ctx.fillStyle = "#ffffff"; // Ağ rəngdə 0 və 1-lər
+      ctx.fillStyle = "#ffffff";
       ctx.font = fontSize + "px monospace";
 
       for (let i = 0; i < drops.length; i++) {
@@ -140,7 +138,7 @@
 
     setInterval(drawMatrix, 50);
 
-    // Resize zamanı canvas-ı yenilə
+    // Pəncərə ölçüsü dəyişəndə canvas-ı yenilə
     window.addEventListener("resize", () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
