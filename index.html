@@ -16,7 +16,6 @@
       background-size: cover;
     }
 
-
     canvas {
       position: fixed;
       top: 0;
@@ -38,39 +37,37 @@
     }
 
     h1 {
-  margin: 0;
-  font-size: 6vw;
-  font-weight: bold;
-  text-shadow: 
-    0 0 2px #000000,
-    0 0 4px #000000;
-}
+      margin: 0;
+      font-size: 6vw;
+      font-weight: bold;
+      text-shadow: 
+        0 0 2px #000000,
+        0 0 4px #000000;
+    }
 
-    
     #countdown {
-  margin-top: 2vh;
-  font-size: 3vw;
-  text-shadow: 
-    0 0 2px #000000,
-    0 0 4px #000000;
-}
+      margin-top: 2vh;
+      font-size: 3vw;
+      text-shadow: 
+        0 0 2px #000000,
+        0 0 4px #000000;
+    }
 
     @media (max-width: 600px) {
-  h1 {
-    font-size: 8vw;
-    text-shadow: 
-      0 0 2px #000000,
-      0 0 4px #000000;
-  }
+      h1 {
+        font-size: 8vw;
+        text-shadow: 
+          0 0 2px #000000,
+          0 0 4px #000000;
+      }
 
-  #countdown {
-    font-size: 4.5vw;
-    text-shadow: 
-      0 0 2px #000000,
-      0 0 4px #000000;
-  }
-}
-
+      #countdown {
+        font-size: 4.5vw;
+        text-shadow: 
+          0 0 2px #000000,
+          0 0 4px #000000;
+      }
+    }
   </style>
 </head>
 <body>
@@ -118,14 +115,15 @@
     const binary = "01";
     const fontSize = 16;
     const columns = canvas.width / fontSize;
-    const drops = Array.from({ length: columns }, () => 1);
+
+    // Hər sütuna random başlanğıc nöqtəsi veririk
+    const drops = Array.from({ length: columns }, () => Math.random() * canvas.height / fontSize);
 
     function drawMatrix() {
-      // Arxa fon: şəffaf bənövşəyi qatı overlay kimi
       ctx.fillStyle = "rgba(0, 0, 0, 0.1)";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      ctx.fillStyle = "#ffffff"; // Ağ rəngdə 0 və 1-lər
+      ctx.fillStyle = "#ffffff";
       ctx.font = fontSize + "px monospace";
 
       for (let i = 0; i < drops.length; i++) {
@@ -142,7 +140,7 @@
 
     setInterval(drawMatrix, 50);
 
-    // Resize zamanı canvas-ı yenilə
+    // Pəncərə ölçüsü dəyişdikdə canvas-ı uyğunlaşdır
     window.addEventListener("resize", () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
