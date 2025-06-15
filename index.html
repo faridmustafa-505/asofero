@@ -53,6 +53,23 @@
         0 0 4px #000000;
     }
 
+    #redirectButton {
+      display: none;
+      margin-top: 20px;
+      padding: 12px 24px;
+      background-color: rgba(255, 255, 255, 0.1);
+      border: 1px solid #fff;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 8px;
+      font-size: 3vw;
+      transition: background 0.3s;
+    }
+
+    #redirectButton:hover {
+      background-color: rgba(255, 255, 255, 0.3);
+    }
+
     @media (max-width: 600px) {
       h1 {
         font-size: 8vw;
@@ -67,6 +84,10 @@
           0 0 2px #000000,
           0 0 4px #000000;
       }
+
+      #redirectButton {
+        font-size: 4vw;
+      }
     }
   </style>
 </head>
@@ -76,6 +97,7 @@
 
   <div class="container">
     <div id="countdown">Yüklənir...</div>
+    <a id="redirectButton" href="https://asofero.blogspot.com/" target="_blank">2014-2025 İLLİK</a>
   </div>
 
   <script>
@@ -86,7 +108,8 @@
       const diff = targetDate - now;
 
       if (diff <= 0) {
-        document.getElementById("countdown").innerHTML = "GERÇƏKLƏŞMƏYƏN XƏYALLAR, QƏLBİMDƏ QIRIQ SƏSSİZ DUALAR.💔";
+        document.getElementById("countdown").innerHTML = "GERÇƏKLƏŞMƏYƏN XƏYALLAR 💔";
+        document.getElementById("redirectButton").style.display = "inline-block";
         return;
       }
 
@@ -115,8 +138,6 @@
     const binary = "01";
     const fontSize = 16;
     const columns = canvas.width / fontSize;
-
-    // Hər sütuna random başlanğıc nöqtəsi veririk
     const drops = Array.from({ length: columns }, () => Math.random() * canvas.height / fontSize);
 
     function drawMatrix() {
@@ -140,7 +161,6 @@
 
     setInterval(drawMatrix, 50);
 
-    // Pəncərə ölçüsü dəyişdikdə canvas-ı uyğunlaşdır
     window.addEventListener("resize", () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
